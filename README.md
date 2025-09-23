@@ -18,8 +18,7 @@ Tipsy is a party game hub designed for fast-paced, ice-breaking fun. The MVP shi
 
 ### Installation
 ```bash
-# clone or open the repository, then
-cd tipsy-app-mobile
+# from the repository root
 npm install
 ```
 
@@ -33,7 +32,7 @@ npm run ios      # or npm run android / npm run web
 
 ## Project Structure
 ```
-tipsy-app-mobile/
+tipsy-app/
 ├── App.tsx               # App entry point with stack navigation & font loading
 ├── src/
 │   ├── contexts/         # Auth context (email-only session)
@@ -44,7 +43,8 @@ tipsy-app-mobile/
 ├── assets/
 │   ├── fonts/            # Magic2.otf lives here
 │   └── images/           # (placeholder for future artwork)
-└── ...                   # Expo + TypeScript config files
+├── package.json          # Expo + TypeScript dependencies & scripts
+└── ...                   # Expo configuration files (tsconfig, babel, etc.)
 ```
 
 ## Roadmap Ideas
