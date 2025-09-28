@@ -4,7 +4,10 @@ Tipsy is a party game hub designed for fast-paced, ice-breaking fun. The MVP shi
 
 ## Features
 - Landing screen with lightweight email sign-in (no backend required yet).
+- Player setup screen to capture everyone in the session.
+- Session vibe selector (friends vs new friends) to tailor upcoming games.
 - Game hub listing available games, starting with **Spin**.
+- **Tipsy Trap** (friends mode) and **Spin** (new friends mode) as the first two playable games.
 - Spin game with rotating prompt list to spark laughs instantly.
 - Custom theming and typography (Magic font) for the Tipsy brand.
 

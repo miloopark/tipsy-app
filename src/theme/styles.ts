@@ -2,10 +2,11 @@ import { StyleSheet } from 'react-native';
 
 const colors = {
   background: '#583194',
-  card: '#8069b3ff',
-  accent: '#FFFF',
-  textPrimary: '#F5EEFF',
-  textSecondary: 'rgba(245, 238, 255, 0.7)'
+  card: '#7064c9',
+  accent: '#ffff',
+  textPrimary: '#ffff',
+  textSecondary: 'rgba(245, 238, 255, 0.7)',
+  border: 'rgba(255, 255, 255, 0.25)'
 };
 
 export default StyleSheet.create({
@@ -31,12 +32,15 @@ export default StyleSheet.create({
   heroContainer: {
     gap: 8
   },
+  modeTop: {
+    gap: 24
+  },
   landingHero: {
     alignItems: 'center',
-    gap: 16
+    gap: 12
   },
   logo: {
-    fontSize: 112,
+    fontSize: 100,
     color: colors.accent,
     letterSpacing: 5,
     fontFamily: 'Magic'
@@ -44,7 +48,7 @@ export default StyleSheet.create({
   tagline: {
     fontSize: 18,
     color: colors.textPrimary,
-    opacity: 0.8,
+    opacity: 0.8
   },
   taglineCentered: {
     textAlign: 'center'
@@ -78,7 +82,7 @@ export default StyleSheet.create({
     paddingVertical: 14,
     borderRadius: 14,
     borderWidth: 1,
-    borderColor: 'rgba(255, 255, 255, 0.4)',
+    borderColor: colors.border,
     alignItems: 'center'
   },
   secondaryButtonText: {
@@ -104,6 +108,12 @@ export default StyleSheet.create({
   },
   gameSubtitle: {
     color: colors.textSecondary
+  },
+  gamePlaceholder: {
+    color: colors.textSecondary,
+    fontSize: 16,
+    textAlign: 'center',
+    marginTop: 48
   },
   backButton: {
     flexDirection: 'row',
@@ -134,5 +144,131 @@ export default StyleSheet.create({
     fontSize: 18,
     textAlign: 'center',
     lineHeight: 28
+  },
+  promptOverlay: {
+    position: 'absolute',
+    inset: 0,
+    backgroundColor: 'rgba(18, 0, 47, 0.78)',
+    justifyContent: 'center',
+    alignItems: 'center',
+    padding: 24
+  },
+  promptHeading: {
+    color: colors.accent,
+    fontSize: 20,
+    fontWeight: '700',
+    marginBottom: 12,
+    textAlign: 'center'
+  },
+  spinStage: {
+    flex: 1,
+    alignItems: 'center',
+    justifyContent: 'center',
+    gap: 28,
+    marginTop: 24
+  },
+  spinCircle: {
+    width: 260,
+    height: 260,
+    borderRadius: 130,
+    backgroundColor: 'rgba(245, 238, 255, 0.08)',
+    alignItems: 'center',
+    justifyContent: 'center',
+    position: 'relative'
+  },
+  bottleContainer: {
+    position: 'absolute',
+    width: 200,
+    height: 200,
+    alignItems: 'center',
+    justifyContent: 'center'
+  },
+  spinHint: {
+    color: colors.textSecondary,
+    fontSize: 14,
+    textAlign: 'center'
+  },
+  playersList: {
+    width: '100%',
+    gap: 12,
+    marginTop: 24
+  },
+  modeOptions: {
+    width: '100%',
+    gap: 18,
+    marginTop: 24,
+    marginBottom: 32
+  },
+  modeCard: {
+    backgroundColor: colors.card,
+    borderRadius: 20,
+    padding: 24,
+    gap: 12,
+    borderWidth: 1,
+    borderColor: colors.border
+  },
+  modeCardSelected: {
+    borderColor: colors.accent
+  },
+  modeTitle: {
+    color: colors.textPrimary,
+    fontSize: 20,
+    fontWeight: '700'
+  },
+  modeDescription: {
+    color: colors.textSecondary,
+    fontSize: 15,
+    lineHeight: 22
+  },
+  playerRow: {
+    flexDirection: 'row',
+    alignItems: 'center',
+    gap: 12
+  },
+  playerAvatar: {
+    width: 48,
+    height: 48,
+    borderRadius: 24,
+    alignItems: 'center',
+    justifyContent: 'center',
+    borderWidth: 1,
+    borderColor: colors.border
+  },
+  playerInitial: {
+    fontSize: 18,
+    fontWeight: '700'
+  },
+  playerInput: {
+    flex: 1,
+    backgroundColor: colors.card,
+    color: colors.textPrimary,
+    paddingHorizontal: 16,
+    paddingVertical: 14,
+    borderRadius: 14,
+    fontSize: 16
+  },
+  removePlayerButton: {
+    paddingVertical: 10,
+    paddingHorizontal: 14,
+    borderRadius: 14,
+    borderWidth: 1,
+    borderColor: colors.border
+  },
+  removePlayerText: {
+    color: colors.textPrimary,
+    fontSize: 13
+  },
+  addPlayerButton: {
+    marginTop: 16,
+    paddingVertical: 14,
+    borderRadius: 14,
+    borderWidth: 1,
+    borderColor: colors.border,
+    alignItems: 'center'
+  },
+  addPlayerText: {
+    color: colors.textPrimary,
+    fontSize: 15,
+    fontWeight: '500'
   }
 });

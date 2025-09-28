@@ -11,6 +11,7 @@ import {
 } from 'react-native';
 import { SafeAreaView } from 'react-native-safe-area-context';
 import { useAuth } from '@/contexts/AuthContext';
+import { usePlayers } from '@/contexts/PlayersContext';
 import styles from '@/theme/styles';
 import { RootStackParamList } from '@/types/navigation';
 
@@ -19,6 +20,7 @@ type Props = NativeStackScreenProps<RootStackParamList, 'Landing'>;
 export default function LandingScreen({ navigation }: Props) {
   const [emailInput, setEmailInput] = useState('');
   const { signIn } = useAuth();
+  const { resetSession } = usePlayers();
 
   const handleContinue = () => {
     if (!emailInput.includes('@')) {
@@ -27,7 +29,8 @@ export default function LandingScreen({ navigation }: Props) {
     }
 
     signIn(emailInput);
-    navigation.navigate('GameHub');
+    resetSession();
+    navigation.navigate('PlayerSetup');
   };
 
   return (

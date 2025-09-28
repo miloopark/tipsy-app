@@ -4,9 +4,13 @@ import { StatusBar } from 'expo-status-bar';
 import { useFonts } from 'expo-font';
 import { View } from 'react-native';
 import AuthProvider from '@/contexts/AuthContext';
+import PlayersProvider from '@/contexts/PlayersContext';
 import LandingScreen from '@/screens/LandingScreen';
+import PlayerSetupScreen from '@/screens/PlayerSetupScreen';
+import ModeSelectScreen from '@/screens/ModeSelectScreen';
 import GameHubScreen from '@/screens/GameHubScreen';
 import SpinGameScreen from '@/games/spin/SpinGameScreen';
+import TipsyTrapScreen from '@/games/tipsyTrap/TipsyTrapScreen';
 import { RootStackParamList } from '@/types/navigation';
 
 const Stack = createNativeStackNavigator<RootStackParamList>();
@@ -22,14 +26,19 @@ export default function App() {
 
   return (
     <AuthProvider>
-      <NavigationContainer>
-        <StatusBar style="light" />
-        <Stack.Navigator screenOptions={{ headerShown: false }}>
-          <Stack.Screen name="Landing" component={LandingScreen} />
-          <Stack.Screen name="GameHub" component={GameHubScreen} />
-          <Stack.Screen name="SpinGame" component={SpinGameScreen} />
-        </Stack.Navigator>
-      </NavigationContainer>
+      <PlayersProvider>
+        <NavigationContainer>
+          <StatusBar style="light" />
+          <Stack.Navigator screenOptions={{ headerShown: false }}>
+            <Stack.Screen name="Landing" component={LandingScreen} />
+            <Stack.Screen name="PlayerSetup" component={PlayerSetupScreen} />
+            <Stack.Screen name="ModeSelect" component={ModeSelectScreen} />
+            <Stack.Screen name="GameHub" component={GameHubScreen} />
+            <Stack.Screen name="SpinGame" component={SpinGameScreen} />
+            <Stack.Screen name="TipsyTrap" component={TipsyTrapScreen} />
+          </Stack.Navigator>
+        </NavigationContainer>
+      </PlayersProvider>
     </AuthProvider>
   );
 }
