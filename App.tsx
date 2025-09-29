@@ -11,6 +11,7 @@ import ModeSelectScreen from '@/screens/ModeSelectScreen';
 import GameHubScreen from '@/screens/GameHubScreen';
 import SpinGameScreen from '@/games/spin/SpinGameScreen';
 import TipsyTrapScreen from '@/games/tipsyTrap/TipsyTrapScreen';
+import HotSeatScreen from '@/games/hotSeat/HotSeatScreen';
 import { RootStackParamList } from '@/types/navigation';
 
 const Stack = createNativeStackNavigator<RootStackParamList>();
@@ -36,6 +37,7 @@ export default function App() {
             <Stack.Screen name="GameHub" component={GameHubScreen} />
             <Stack.Screen name="SpinGame" component={SpinGameScreen} />
             <Stack.Screen name="TipsyTrap" component={TipsyTrapScreen} />
+            <Stack.Screen name="HotSeat" component={HotSeatScreen} />
           </Stack.Navigator>
         </NavigationContainer>
       </PlayersProvider>

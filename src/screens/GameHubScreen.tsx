@@ -28,6 +28,7 @@ export default function GameHubScreen({ navigation }: Props) {
 
   const showSpin = mode !== 'friends';
   const showTrap = mode !== 'newFriends';
+  const showHotSeat = mode !== 'friends';
 
   return (
     <SafeAreaView style={styles.safeArea}>
@@ -47,6 +48,13 @@ export default function GameHubScreen({ navigation }: Props) {
           </TouchableOpacity>
         )}
 
+        {showHotSeat && (
+          <TouchableOpacity style={styles.gameCard} onPress={() => navigation.navigate('HotSeat')}>
+            <Text style={styles.gameTitle}>Hot Seat</Text>
+            <Text style={styles.gameSubtitle}>30-second grilling — answer or drink</Text>
+          </TouchableOpacity>
+        )}
+
         {showTrap && (
           <TouchableOpacity style={styles.gameCard} onPress={() => navigation.navigate('TipsyTrap')}>
             <Text style={styles.gameTitle}>Tipsy Trap</Text>
@@ -54,7 +62,7 @@ export default function GameHubScreen({ navigation }: Props) {
           </TouchableOpacity>
         )}
 
-        {!showSpin && !showTrap && (
+        {!showSpin && !showTrap && !showHotSeat && (
           <Text style={styles.gamePlaceholder}>Crew-only games are brewing. Check back soon!</Text>
         )}
 

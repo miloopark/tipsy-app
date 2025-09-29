@@ -5,4 +5,5 @@ export type RootStackParamList = {
   GameHub: undefined;
   SpinGame: undefined;
   TipsyTrap: undefined;
+  HotSeat: undefined;
 };
