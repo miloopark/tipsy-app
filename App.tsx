@@ -5,13 +5,17 @@ import { useFonts } from 'expo-font';
 import { View } from 'react-native';
 import AuthProvider from '@/contexts/AuthContext';
 import PlayersProvider from '@/contexts/PlayersContext';
-import LandingScreen from '@/screens/LandingScreen';
-import PlayerSetupScreen from '@/screens/PlayerSetupScreen';
+import EntryScreen from '@/screens/EntryScreen';
+import ManualWhoScreen from '@/screens/ManualWhoScreen';
+import WhoScreen from '@/screens/WhoScreen';
+import RoomsScreen from '@/screens/RoomsScreen';
+import RoomDetailScreen from '@/screens/RoomDetailScreen';
 import ModeSelectScreen from '@/screens/ModeSelectScreen';
 import GameHubScreen from '@/screens/GameHubScreen';
 import SpinGameScreen from '@/games/spin/SpinGameScreen';
-import TipsyTrapScreen from '@/games/tipsyTrap/TipsyTrapScreen';
+import LoopyTrapScreen from '@/games/loopyTrap/LoopyTrapScreen';
 import HotSeatScreen from '@/games/hotSeat/HotSeatScreen';
+import CategoriesScreen from '@/games/categories/CategoriesScreen';
 import { RootStackParamList } from '@/types/navigation';
 
 const Stack = createNativeStackNavigator<RootStackParamList>();
@@ -22,22 +26,26 @@ export default function App() {
   });
 
   if (!fontsLoaded) {
-    return <View style={{ flex: 1, backgroundColor: '#12002F' }} />;
+    return <View style={{ flex: 1, backgroundColor: '#F9F7F6' }} />;
   }
 
   return (
     <AuthProvider>
       <PlayersProvider>
         <NavigationContainer>
-          <StatusBar style="light" />
+          <StatusBar style="dark" />
           <Stack.Navigator screenOptions={{ headerShown: false }}>
-            <Stack.Screen name="Landing" component={LandingScreen} />
-            <Stack.Screen name="PlayerSetup" component={PlayerSetupScreen} />
+            <Stack.Screen name="Entry" component={EntryScreen} />
+            <Stack.Screen name="ManualWho" component={ManualWhoScreen} />
+            <Stack.Screen name="Who" component={WhoScreen} />
+            <Stack.Screen name="Rooms" component={RoomsScreen} />
+            <Stack.Screen name="RoomDetail" component={RoomDetailScreen} />
             <Stack.Screen name="ModeSelect" component={ModeSelectScreen} />
             <Stack.Screen name="GameHub" component={GameHubScreen} />
             <Stack.Screen name="SpinGame" component={SpinGameScreen} />
-            <Stack.Screen name="TipsyTrap" component={TipsyTrapScreen} />
+            <Stack.Screen name="LoopyTrap" component={LoopyTrapScreen} />
             <Stack.Screen name="HotSeat" component={HotSeatScreen} />
+            <Stack.Screen name="Categories" component={CategoriesScreen} />
           </Stack.Navigator>
         </NavigationContainer>
       </PlayersProvider>

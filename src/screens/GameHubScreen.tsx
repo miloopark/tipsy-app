@@ -10,7 +10,7 @@ import { RootStackParamList } from '@/types/navigation';
 type Props = NativeStackScreenProps<RootStackParamList, 'GameHub'>;
 
 export default function GameHubScreen({ navigation }: Props) {
-  const { email, signOut } = useAuth();
+  const { user, clearUser } = useAuth();
   const { mode, resetSession } = usePlayers();
 
   const modeTagline =
@@ -21,14 +21,15 @@ export default function GameHubScreen({ navigation }: Props) {
         : 'Pick tonight’s chaos.';
 
   const handleSwitchUser = () => {
-    signOut();
+    clearUser();
     resetSession();
-    navigation.replace('Landing');
+    navigation.replace('Entry');
   };
 
   const showSpin = mode !== 'friends';
-  const showTrap = mode !== 'newFriends';
   const showHotSeat = mode !== 'friends';
+  const showTrap = mode !== 'newFriends';
+  const showCategories = mode === 'friends';
 
   return (
     <SafeAreaView style={styles.safeArea}>
@@ -36,7 +37,7 @@ export default function GameHubScreen({ navigation }: Props) {
         <View style={styles.topSection}>
           <BackButton />
           <View style={styles.heroContainer}>
-            <Text style={styles.sectionTitle}>Welcome, {email ?? 'guest'}.</Text>
+            <Text style={styles.sectionTitle}>Welcome, {user?.nickname ?? 'guest'}.</Text>
             <Text style={styles.tagline}>{modeTagline}</Text>
           </View>
         </View>
@@ -56,13 +57,20 @@ export default function GameHubScreen({ navigation }: Props) {
         )}
 
         {showTrap && (
-          <TouchableOpacity style={styles.gameCard} onPress={() => navigation.navigate('TipsyTrap')}>
-            <Text style={styles.gameTitle}>Tipsy Trap</Text>
+          <TouchableOpacity style={styles.gameCard} onPress={() => navigation.navigate('LoopyTrap')}>
+            <Text style={styles.gameTitle}>Loopy Trap</Text>
             <Text style={styles.gameSubtitle}>Push your luck — dodge the trap or drink</Text>
           </TouchableOpacity>
         )}
 
-        {!showSpin && !showTrap && !showHotSeat && (
+        {showCategories && (
+          <TouchableOpacity style={styles.gameCard} onPress={() => navigation.navigate('Categories')}>
+            <Text style={styles.gameTitle}>Categories</Text>
+            <Text style={styles.gameSubtitle}>Shout answers that match the letter or drink</Text>
+          </TouchableOpacity>
+        )}
+
+        {!showSpin && !showTrap && !showHotSeat && !showCategories && (
           <Text style={styles.gamePlaceholder}>Crew-only games are brewing. Check back soon!</Text>
         )}
 

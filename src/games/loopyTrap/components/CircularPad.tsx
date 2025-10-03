@@ -61,11 +61,11 @@ function CircularPad({ index, size, state, disabled = false, onPress }: Props) {
   const gradientColors = useMemo(() => {
     switch (state) {
       case 'safe':
-        return ['#B51C2C', '#7F0F1D'] as const;
+        return ['#FFFFFF', '#F4F0ED'] as const;
       case 'trap':
-        return ['#FF7788', '#D51F33'] as const;
+        return ['#FFE0E3', '#F7B9C0'] as const;
       default:
-        return ['#F54D58', '#C41E2D'] as const;
+        return ['#FFFFFF', '#F9F7F6'] as const;
     }
   }, [state]);
 
@@ -114,21 +114,21 @@ const styles = StyleSheet.create({
     width: '100%',
     height: '100%',
     borderRadius: 999,
-    borderWidth: 3,
-    borderColor: '#7A0E1B',
+    borderWidth: 2,
+    borderColor: '#CA2A3A',
     alignItems: 'center',
     justifyContent: 'center',
-    shadowColor: '#000',
-    shadowOpacity: 0.3,
-    shadowRadius: 6,
+    shadowColor: '#D0CECC',
+    shadowOpacity: 0.35,
+    shadowRadius: 8,
     shadowOffset: { width: 0, height: 4 },
-    backgroundColor: '#1D1D23'
+    backgroundColor: '#E5E3E1'
   },
   safe: {
-    borderColor: '#5E0C18'
+    borderColor: '#CA2A3A'
   },
   trap: {
-    borderColor: '#FF9DAF'
+    borderColor: '#E87A84'
   },
   inner: {
     width: '92%',
@@ -137,10 +137,10 @@ const styles = StyleSheet.create({
     alignItems: 'center',
     justifyContent: 'center',
     borderWidth: 1,
-    borderColor: 'rgba(255,255,255,0.25)'
+    borderColor: '#D0CECC'
   },
   label: {
-    color: '#FFF5F5',
+    color: '#CA2A3A',
     fontSize: 16,
     fontWeight: '700'
   }

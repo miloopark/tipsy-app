@@ -3,12 +3,12 @@ import { AccessibilityInfo, Alert, Animated, Pressable, StyleSheet, Text, View, 
 import * as Haptics from 'expo-haptics';
 import { SafeAreaView } from 'react-native-safe-area-context';
 import BackButton from '@/components/BackButton';
-import CircularPad, { PadState } from '@/games/tipsyTrap/components/CircularPad';
+import CircularPad, { PadState } from '@/games/loopyTrap/components/CircularPad';
 import { usePlayers } from '@/contexts/PlayersContext';
 
-const BACKDROP = '#0f0f11';
-const ACCENT = '#FF9D00';
-const SAFE_BORDER = '#2C2C33';
+const BACKDROP = '#F8F3E6';
+const ACCENT = '#CA2A3A';
+const SAFE_BORDER = '#D0CECC';
 
 const PAD_COUNT = 9;
 
@@ -19,7 +19,7 @@ type PlayerInfo = {
   label: string;
 };
 
-export default function TipsyTrapScreen() {
+export default function LoopyTrapScreen() {
   const { players } = usePlayers();
   const names: PlayerInfo[] = useMemo(() => {
     if (!players.length) {
@@ -150,7 +150,7 @@ export default function TipsyTrapScreen() {
         </View>
 
         <View style={styles.hero}>
-          <Text style={styles.title}>Tipsy Trap</Text>
+          <Text style={styles.title}>Loopy Trap</Text>
           <Text style={styles.subtitle}>Don’t hit the trap!</Text>
         </View>
 
@@ -229,7 +229,7 @@ const styles = StyleSheet.create({
     justifyContent: 'center'
   },
   helpText: {
-    color: '#F5F5F7',
+    color: '#7C7C7C',
     fontWeight: '700',
     fontSize: 16
   },
@@ -238,12 +238,12 @@ const styles = StyleSheet.create({
     gap: 8
   },
   title: {
-    color: '#F5F5F7',
+    color: '#1F1F1F',
     fontSize: 32,
     fontWeight: '700'
   },
   subtitle: {
-    color: '#AAAAB3',
+    color: '#7C7C7C',
     fontSize: 16
   },
   grid: {
@@ -257,22 +257,26 @@ const styles = StyleSheet.create({
     paddingHorizontal: 24
   },
   footerText: {
-    color: '#F5F5F7',
+    color: '#1F1F1F',
     fontSize: 18,
     fontWeight: '600'
   },
   counterText: {
-    color: '#6C6C75',
+    color: '#7C7C7C',
     fontSize: 14
   },
   resetButton: {
     backgroundColor: ACCENT,
     paddingHorizontal: 32,
     paddingVertical: 14,
-    borderRadius: 20
+    borderRadius: 20,
+    shadowColor: '#D0CECC',
+    shadowOpacity: 0.3,
+    shadowRadius: 12,
+    shadowOffset: { width: 0, height: 6 }
   },
   resetButtonText: {
-    color: BACKDROP,
+    color: '#F9F7F6',
     fontWeight: '700',
     fontSize: 16
   },
@@ -281,7 +285,7 @@ const styles = StyleSheet.create({
     top: 0,
     left: 0,
     right: 0,
-    backgroundColor: '#1D1D23',
+    backgroundColor: 'rgba(249, 247, 246, 0.95)',
     borderBottomLeftRadius: 24,
     borderBottomRightRadius: 24,
     paddingVertical: 24,
@@ -289,15 +293,19 @@ const styles = StyleSheet.create({
     alignItems: 'center',
     gap: 6,
     borderBottomWidth: 1,
-    borderColor: SAFE_BORDER
+    borderColor: SAFE_BORDER,
+    shadowColor: '#D0CECC',
+    shadowOpacity: 0.35,
+    shadowRadius: 14,
+    shadowOffset: { width: 0, height: 6 }
   },
   bannerTitle: {
-    color: '#FF6F91',
+    color: ACCENT,
     fontSize: 18,
     fontWeight: '700'
   },
   bannerText: {
-    color: '#F5F5F7',
+    color: '#1F1F1F',
     fontSize: 16
   }
 });

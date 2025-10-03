@@ -5,10 +5,10 @@ import Svg, { Circle } from 'react-native-svg';
 import BackButton from '@/components/BackButton';
 import { usePlayers } from '@/contexts/PlayersContext';
 
-const BACKGROUND = '#12002F';
-const SURFACE = '#240051';
-const ACCENT = '#FF9D00';
-const SECONDARY = 'rgba(245, 238, 255, 0.7)';
+const BACKGROUND = '#F8F3E6';
+const SURFACE = '#E5E3E1';
+const ACCENT = '#CA2A3A';
+const SECONDARY = '#7C7C7C';
 
 const ROUND_DURATION_SECONDS = 30;
 
@@ -219,15 +219,15 @@ export default function HotSeatScreen() {
 
         <Pressable style={styles.tapArea} onPress={handleTapToStart} disabled={phase !== 'ready'}>
           <View style={styles.timerCircleContainer}>
-            <Svg width={circleSize} height={circleSize}>
-              <Circle
-                cx={circleSize / 2}
-                cy={circleSize / 2}
-                r={radius}
-                stroke="rgba(255,255,255,0.08)"
-                strokeWidth={strokeWidth}
-                fill="none"
-              />
+              <Svg width={circleSize} height={circleSize}>
+                <Circle
+                  cx={circleSize / 2}
+                  cy={circleSize / 2}
+                  r={radius}
+                  stroke="rgba(31,31,31,0.08)"
+                  strokeWidth={strokeWidth}
+                  fill="none"
+                />
               <AnimatedCircle
                 cx={circleSize / 2}
                 cy={circleSize / 2}
@@ -297,7 +297,7 @@ const styles = StyleSheet.create({
     height: 36,
     borderRadius: 18,
     borderWidth: 1,
-    borderColor: 'rgba(255,255,255,0.2)',
+    borderColor: '#D0CECC',
     alignItems: 'center',
     justifyContent: 'center'
   },
@@ -310,7 +310,7 @@ const styles = StyleSheet.create({
     gap: 8
   },
   title: {
-    color: '#F5EEFF',
+    color: '#1F1F1F',
     fontSize: 32,
     fontWeight: '700'
   },
@@ -325,7 +325,7 @@ const styles = StyleSheet.create({
     justifyContent: 'center'
   },
   playerLabel: {
-    color: '#F5EEFF',
+    color: '#1F1F1F',
     fontSize: 24,
     fontWeight: '700',
     textAlign: 'center'
@@ -346,9 +346,9 @@ const styles = StyleSheet.create({
     width: 150,
     height: 150,
     borderRadius: 75,
-    backgroundColor: 'rgba(18, 0, 47, 0.85)',
+    backgroundColor: 'rgba(249, 247, 246, 0.95)',
     borderWidth: 2,
-    borderColor: 'rgba(255,255,255,0.08)'
+    borderColor: '#D0CECC'
   },
   infoSection: {
     alignItems: 'center',
@@ -366,7 +366,7 @@ const styles = StyleSheet.create({
     paddingHorizontal: 12,
     borderRadius: 12,
     borderWidth: 1,
-    borderColor: 'rgba(255,255,255,0.12)'
+    borderColor: '#D0CECC'
   },
   resetLinkText: {
     color: SECONDARY,
@@ -378,7 +378,7 @@ const styles = StyleSheet.create({
     left: 0,
     right: 0,
     bottom: 0,
-    backgroundColor: 'rgba(18, 0, 47, 0.82)',
+    backgroundColor: 'rgba(249, 247, 246, 0.92)',
     justifyContent: 'center',
     alignItems: 'center',
     padding: 24
@@ -391,7 +391,7 @@ const styles = StyleSheet.create({
     gap: 16
   },
   overlayTitle: {
-    color: '#F5EEFF',
+    color: '#1F1F1F',
     fontSize: 20,
     fontWeight: '700',
     textAlign: 'center'
@@ -405,10 +405,10 @@ const styles = StyleSheet.create({
     backgroundColor: '#1F9341'
   },
   drinkButton: {
-    backgroundColor: '#C41E2D'
+    backgroundColor: '#CA2A3A'
   },
   overlayButtonText: {
-    color: '#F5EEFF',
+    color: '#F9F7F6',
     fontWeight: '700',
     fontSize: 16
   }

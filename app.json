@@ -1,7 +1,7 @@
 {
   "expo": {
-    "name": "tipsy-app-mobile",
-    "slug": "tipsy-app-mobile",
+    "name": "loopy-app-mobile",
+    "slug": "loopy-app-mobile",
     "version": "1.0.0",
     "orientation": "portrait",
     "icon": "./assets/icon.png",

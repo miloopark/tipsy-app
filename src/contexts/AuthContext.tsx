@@ -1,23 +1,28 @@
 import { ReactNode, createContext, useContext, useMemo, useState } from 'react';
+import { User } from '@/types/models';
+
+export type AuthMode = 'guest' | 'signed-in';
 
 export type AuthContextValue = {
-  email: string | null;
-  signIn: (email: string) => void;
-  signOut: () => void;
+  user: User | null;
+  mode: AuthMode;
+  setUser: (user: User) => void;
+  clearUser: () => void;
 };
 
 const AuthContext = createContext<AuthContextValue | undefined>(undefined);
 
 export default function AuthProvider({ children }: { children: ReactNode }) {
-  const [email, setEmail] = useState<string | null>(null);
+  const [user, setUserState] = useState<User | null>(null);
 
   const value = useMemo<AuthContextValue>(
     () => ({
-      email,
-      signIn: (input) => setEmail(input.trim().toLowerCase()),
-      signOut: () => setEmail(null)
+      user,
+      mode: user ? 'signed-in' : 'guest',
+      setUser: (nextUser) => setUserState(nextUser),
+      clearUser: () => setUserState(null)
     }),
-    [email]
+    [user]
   );
 
   return <AuthContext.Provider value={value}>{children}</AuthContext.Provider>;

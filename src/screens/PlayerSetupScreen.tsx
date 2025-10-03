@@ -9,13 +9,13 @@ import { createPlayer, usePlayers } from '@/contexts/PlayersContext';
 import styles from '@/theme/styles';
 import { RootStackParamList } from '@/types/navigation';
 
-type Props = NativeStackScreenProps<RootStackParamList, 'PlayerSetup'>;
+type Props = NativeStackScreenProps<RootStackParamList, 'ManualWho'>;
 
 export default function PlayerSetupScreen({ navigation }: Props) {
-  const { email } = useAuth();
+  const { user } = useAuth();
   const { players, addPlayer, updatePlayer, removePlayer, resetPlayers, setMode } = usePlayers();
 
-  const defaultName = useMemo(() => (email ? email.split('@')[0] ?? 'You' : 'You'), [email]);
+  const defaultName = useMemo(() => user?.nickname ?? 'You', [user]);
 
   useEffect(() => {
     if (!players.length) {
@@ -69,7 +69,7 @@ export default function PlayerSetupScreen({ navigation }: Props) {
               <PlayerAvatar name={player.name || `P${index + 1}`} index={index} />
               <TextInput
                 placeholder="Player name"
-                placeholderTextColor="rgba(245, 238, 255, 0.4)"
+                placeholderTextColor="#B9B6B3"
                 style={styles.playerInput}
                 value={player.name}
                 onChangeText={(text) => handleUpdate(player.id, text)}

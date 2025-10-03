@@ -2,13 +2,13 @@ import { memo, useMemo } from 'react';
 import { Text, View } from 'react-native';
 import styles from '@/theme/styles';
 
-const defaultBorderColor = 'rgba(255, 255, 255, 0.25)';
+const defaultBorderColor = '#D0CECC';
 
 const swatches = [
-  { background: '#FF9D00', text: '#12002F' },
-  { background: '#240051', text: '#F5EEFF' },
-  { background: '#F5EEFF', text: '#240051' },
-  { background: '#12002F', text: '#FF9D00' }
+  { background: '#CA2A3A', text: '#F9F7F6' },
+  { background: '#E5E3E1', text: '#1F1F1F' },
+  { background: '#E87A84', text: '#1F1F1F' },
+  { background: '#F9F7F6', text: '#CA2A3A' }
 ];
 
 type Props = {
@@ -32,7 +32,7 @@ function PlayerAvatar({ name, index, size = 48, isActive = false }: Props) {
   }, [name]);
 
   const palette = swatches[index % swatches.length];
-  const borderColor = isActive ? '#FF9D00' : defaultBorderColor;
+  const borderColor = isActive ? '#CA2A3A' : defaultBorderColor;
   const fontSize = size > 48 ? 20 : Math.max(14, Math.round(size * 0.45));
 
   return (
