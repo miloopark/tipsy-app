@@ -8,6 +8,7 @@ import PlayersProvider from '@/contexts/PlayersContext';
 import EntryScreen from '@/screens/EntryScreen';
 import ManualWhoScreen from '@/screens/ManualWhoScreen';
 import WhoScreen from '@/screens/WhoScreen';
+import MainTabs from '@/navigation/MainTabs';
 import RoomsScreen from '@/screens/RoomsScreen';
 import RoomDetailScreen from '@/screens/RoomDetailScreen';
 import ModeSelectScreen from '@/screens/ModeSelectScreen';
@@ -38,6 +39,7 @@ export default function App() {
             <Stack.Screen name="Entry" component={EntryScreen} />
             <Stack.Screen name="ManualWho" component={ManualWhoScreen} />
             <Stack.Screen name="Who" component={WhoScreen} />
+            <Stack.Screen name="MainTabs" component={MainTabs} />
             <Stack.Screen name="Rooms" component={RoomsScreen} />
             <Stack.Screen name="RoomDetail" component={RoomDetailScreen} />
             <Stack.Screen name="ModeSelect" component={ModeSelectScreen} />

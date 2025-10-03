@@ -41,6 +41,7 @@ export default function WhoScreen({ navigation }: Props) {
   const [searching, setSearching] = useState(false);
   const [manualPlayers, setManualPlayers] = useState<ManualPlayer[]>([]);
   const [roomName, setRoomName] = useState('');
+  const [isPublic, setIsPublic] = useState(false);
 
   const { friends } = useFriendsList();
   const {
@@ -109,13 +110,17 @@ export default function WhoScreen({ navigation }: Props) {
 
     const created = await createRoom(roomName.trim() || 'Loopy Room', {
       memberIds: selectedFriends,
-      localPlayers
+      localPlayers,
+      isPublic,
+      maxPlayers: 8,
+      status: 'open'
     });
 
     resetPlayers(localPlayers.map((p, index) => ({ id: `${index}`, name: p.name })));
     setSelectedFriends([]);
     setManualPlayers([]);
     setRoomName('');
+    setIsPublic(false);
 
     navigation.navigate('RoomDetail', { roomId: created.id });
   };
@@ -300,11 +305,20 @@ export default function WhoScreen({ navigation }: Props) {
             value={roomName}
             onChangeText={setRoomName}
           />
+          <Pressable
+            style={styles.publicToggle}
+            onPress={() => setIsPublic(!isPublic)}
+          >
+            <View style={[styles.checkbox, isPublic && styles.checkboxChecked]}>
+              {isPublic && <Text style={styles.checkmark}>✓</Text>}
+            </View>
+            <Text style={styles.publicToggleText}>Make room public (visible on dashboard)</Text>
+          </Pressable>
           <Pressable style={[styles.primaryButton, styles.createButton]} onPress={handleCreateRoom}>
             <Text style={styles.primaryButtonText}>Create Loopy Room</Text>
           </Pressable>
-          <Pressable style={[styles.secondaryButton, styles.roomsButton]} onPress={() => navigation.navigate('Rooms')}>
-            <Text style={styles.secondaryButtonText}>Go to Rooms</Text>
+          <Pressable style={[styles.secondaryButton, styles.roomsButton]} onPress={() => navigation.navigate('MainTabs')}>
+            <Text style={styles.secondaryButtonText}>Browse Public Rooms</Text>
           </Pressable>
         </View>
       </View>
@@ -535,6 +549,37 @@ const styles = StyleSheet.create({
     paddingHorizontal: 16,
     paddingVertical: 12,
     color: '#1F1F1F'
+  },
+  publicToggle: {
+    flexDirection: 'row',
+    alignItems: 'center',
+    gap: 12,
+    paddingVertical: 8
+  },
+  checkbox: {
+    width: 24,
+    height: 24,
+    borderRadius: 6,
+    borderWidth: 2,
+    borderColor: '#D0CECC',
+    alignItems: 'center',
+    justifyContent: 'center',
+    backgroundColor: '#FFF'
+  },
+  checkboxChecked: {
+    backgroundColor: '#CA2A3A',
+    borderColor: '#CA2A3A'
+  },
+  checkmark: {
+    color: '#FFF',
+    fontSize: 16,
+    fontWeight: '700'
+  },
+  publicToggleText: {
+    flex: 1,
+    fontSize: 14,
+    color: '#1F1F1F',
+    fontWeight: '500'
   },
   createButton: {
     shadowColor: '#D0CECC',

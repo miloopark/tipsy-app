@@ -6,6 +6,9 @@ const APP_ID = '023237b2-90a4-4124-831c-e2634fb6d20b';
 export const db = init({ appId: APP_ID, schema });
 console.log('[instant:init] client created', { appId: APP_ID });
 
+// Store the current auth in memory
+let currentAuthCache: { id: string; email: string } | null = null;
+
 type SubscriptionMeta = {
   source: string;
   query: Record<string, unknown> | null;
@@ -39,6 +42,9 @@ export const signInWithMagicCode = async (email: string, code: string): Promise<
     if (!result?.user?.id) {
       throw new Error('Sign in failed - no user ID in result');
     }
+    // Cache the auth result
+    currentAuthCache = { id: result.user.id, email: result.user.email };
+    console.log('[instant:signInWithMagicCode] Cached auth:', currentAuthCache);
     return result;
   } catch (error: any) {
     console.error('[instant:signInWithMagicCode] Error details:', {
@@ -52,22 +58,13 @@ export const signInWithMagicCode = async (email: string, code: string): Promise<
 };
 
 export const getCurrentAuth = (): { id: string; email: string } | null => {
-  try {
-    // Access the internal auth state from InstantDB
-    // @ts-ignore - accessing internal _core property
-    const authState = db._core?._reactor?.auth;
-    if (!authState?.user?.id || !authState?.user?.email) {
-      return null;
-    }
-    return { id: authState.user.id, email: authState.user.email };
-  } catch (error) {
-    console.error('[getCurrentAuth] Error:', error);
-    return null;
-  }
+  console.log('[getCurrentAuth] Returning cached auth:', currentAuthCache);
+  return currentAuthCache;
 };
 
 export const signOut = async (): Promise<void> => {
   await db.auth.signOut();
+  currentAuthCache = null;
 };
 
 export const waitForOnline = async (): Promise<void> => {

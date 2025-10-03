@@ -37,7 +37,13 @@ const runTransact = async (chunks: any | any[]) => {
 
 export const createRoom = async (
   name: string,
-  options?: { localPlayers?: { name: string }[]; memberIds?: string[] }
+  options?: {
+    localPlayers?: { name: string }[];
+    memberIds?: string[];
+    isPublic?: boolean;
+    maxPlayers?: number;
+    status?: 'open' | 'in-progress' | 'finished';
+  }
 ): Promise<Room> => {
   const createdBy = await getCurrentUserId();
   const baseMembers = Array.from(new Set([createdBy, ...(options?.memberIds ?? [])]));
@@ -50,7 +56,10 @@ export const createRoom = async (
     createdBy,
     members: baseMembers,
     createdAt,
-    ...(options?.localPlayers ? { localPlayers: options.localPlayers } : {})
+    ...(options?.localPlayers ? { localPlayers: options.localPlayers } : {}),
+    ...(options?.isPublic !== undefined ? { isPublic: options.isPublic } : {}),
+    ...(options?.maxPlayers ? { maxPlayers: options.maxPlayers } : {}),
+    ...(options?.status ? { status: options.status } : {})
   };
 
   await runTransact([

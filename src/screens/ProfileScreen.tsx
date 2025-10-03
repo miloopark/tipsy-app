@@ -1,7 +1,7 @@
 import { View, Text, StyleSheet, TouchableOpacity, Alert } from 'react-native';
 import { SafeAreaView } from 'react-native-safe-area-context';
 import { useAuth } from '@/contexts/AuthContext';
-import { signOut } from '@/instant/instant';
+import { signOut } from '@/services/firebaseService';
 import * as Clipboard from 'expo-clipboard';
 
 export default function ProfileScreen({ navigation }: any) {
@@ -46,8 +46,33 @@ export default function ProfileScreen({ navigation }: any) {
 
   return (
     <SafeAreaView style={styles.container}>
+      <View style={styles.header}>
+        <Text style={styles.title}>Profile</Text>
+      </View>
+
       <View style={styles.content}>
-        <Text style={styles.title}>Your Profile</Text>
+        <View style={styles.avatarContainer}>
+          <View style={styles.avatar}>
+            <Text style={styles.avatarText}>{user.nickname?.[0]?.toUpperCase() || '?'}</Text>
+          </View>
+          <Text style={styles.nickname}>{user.nickname}</Text>
+          {user.phone && <Text style={styles.phone}>{user.phone}</Text>}
+        </View>
+
+        <View style={styles.statsContainer}>
+          <View style={styles.statCard}>
+            <Text style={styles.statValue}>{user.gamesPlayed || 0}</Text>
+            <Text style={styles.statLabel}>Games Played</Text>
+          </View>
+          <View style={styles.statCard}>
+            <Text style={styles.statValue}>{user.gamesWon || 0}</Text>
+            <Text style={styles.statLabel}>Games Won</Text>
+          </View>
+          <View style={styles.statCard}>
+            <Text style={styles.statValue}>{user.totalPoints || 0}</Text>
+            <Text style={styles.statLabel}>Total Points</Text>
+          </View>
+        </View>
 
         <View style={styles.section}>
           <Text style={styles.label}>Nickname</Text>
@@ -58,17 +83,6 @@ export default function ProfileScreen({ navigation }: any) {
             </TouchableOpacity>
           </View>
           <Text style={styles.hint}>Share this with friends so they can add you</Text>
-        </View>
-
-        <View style={styles.section}>
-          <Text style={styles.label}>Email</Text>
-          <Text style={styles.value}>{user.email}</Text>
-        </View>
-
-        <View style={styles.section}>
-          <Text style={styles.label}>User ID</Text>
-          <Text style={styles.valueSmall}>{user.id}</Text>
-          <Text style={styles.hint}>Your unique identifier</Text>
         </View>
 
         <TouchableOpacity style={styles.signOutButton} onPress={handleSignOut}>
@@ -82,17 +96,76 @@ export default function ProfileScreen({ navigation }: any) {
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-    backgroundColor: '#F8F3E6'
+    backgroundColor: '#F9F7F6'
+  },
+  header: {
+    paddingHorizontal: 20,
+    paddingVertical: 16,
+    backgroundColor: '#FFFFFF',
+    borderBottomWidth: 1,
+    borderBottomColor: '#E8E6E3',
   },
   content: {
     flex: 1,
-    padding: 24
+    padding: 20
   },
   title: {
-    fontSize: 32,
+    fontSize: 28,
+    fontWeight: '700',
+    color: '#1F1F1F'
+  },
+  avatarContainer: {
+    alignItems: 'center',
+    paddingVertical: 32,
+  },
+  avatar: {
+    width: 96,
+    height: 96,
+    borderRadius: 48,
+    backgroundColor: '#CA2A3A',
+    alignItems: 'center',
+    justifyContent: 'center',
+    marginBottom: 16,
+  },
+  avatarText: {
+    fontSize: 40,
+    fontWeight: '700',
+    color: '#F9F7F6',
+  },
+  nickname: {
+    fontSize: 24,
     fontWeight: '700',
     color: '#1F1F1F',
-    marginBottom: 32
+    marginBottom: 4,
+  },
+  phone: {
+    fontSize: 14,
+    color: '#6B6966',
+  },
+  statsContainer: {
+    flexDirection: 'row',
+    gap: 12,
+    marginBottom: 32,
+  },
+  statCard: {
+    flex: 1,
+    backgroundColor: '#FFFFFF',
+    borderRadius: 16,
+    padding: 20,
+    alignItems: 'center',
+    borderWidth: 1,
+    borderColor: '#E8E6E3',
+  },
+  statValue: {
+    fontSize: 28,
+    fontWeight: '700',
+    color: '#CA2A3A',
+    marginBottom: 4,
+  },
+  statLabel: {
+    fontSize: 12,
+    color: '#6B6966',
+    textAlign: 'center',
   },
   section: {
     marginBottom: 24

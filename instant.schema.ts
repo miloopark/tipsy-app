@@ -39,12 +39,24 @@ const _schema = i.schema({
       localPlayers: i.any().optional(),
       members: i.any(),
       name: i.string(),
+      isPublic: i.boolean().optional(), // For public dashboard
+      status: i.string().optional(), // 'open' | 'in-progress' | 'finished'
+      maxPlayers: i.number().optional(),
     }),
     users: i.entity({
       createdAt: i.number(),
       email: i.string().unique().indexed().optional(),
       nickname: i.string(),
       nicknameLower: i.string().indexed().optional(),
+      // Firebase auth fields
+      firebaseUid: i.string().unique().indexed().optional(),
+      phone: i.string().unique().indexed().optional(),
+      phoneHash: i.string().indexed().optional(), // For contact matching
+      photoURL: i.string().optional(),
+      // Stats for leaderboard
+      gamesPlayed: i.number().optional(),
+      gamesWon: i.number().optional(),
+      totalPoints: i.number().optional(),
     }),
   },
   links: {},

@@ -2,10 +2,10 @@ import { useEffect, useState } from 'react';
 import { ActivityIndicator, ImageBackground, StyleSheet, Text, TouchableOpacity, View } from 'react-native';
 import { NativeStackScreenProps } from '@react-navigation/native-stack';
 import { SafeAreaView } from 'react-native-safe-area-context';
-import EmailSignInModal from '@/screens/EmailSignInModal';
+import PhoneSignInModal from '@/screens/PhoneSignInModal';
 import { useAuth } from '@/contexts/AuthContext';
 import { usePlayers } from '@/contexts/PlayersContext';
-import { getCurrentAuth } from '@/instant/instant';
+import { getCurrentFirebaseUser } from '@/services/firebaseService';
 import { getUsersByIds } from '@/services/userService';
 import { User } from '@/types/models';
 import { RootStackParamList } from '@/types/navigation';
@@ -18,18 +18,23 @@ export default function EntryScreen({ navigation }: Props) {
   const { user, setUser, clearUser } = useAuth();
   const { resetSession } = usePlayers();
   const [initializing, setInitializing] = useState(true);
-  const [showEmailSignIn, setShowEmailSignIn] = useState(false);
+  const [showPhoneSignIn, setShowPhoneSignIn] = useState(false);
 
   useEffect(() => {
     let mounted = true;
     (async () => {
       try {
-        const auth = await getCurrentAuth();
-        if (auth?.id && mounted) {
-          const id = auth.id;
-          const existing = await getUsersByIds([id]);
-          if (mounted && existing[0]) {
-            setUser(existing[0]);
+        const firebaseUser = await getCurrentFirebaseUser();
+        if (firebaseUser?.uid && mounted) {
+          // Look up user by Firebase UID
+          const { db } = await import('@/instant/instant');
+          const { users } = await db.queryOnce({
+            users: {
+              $: { where: { firebaseUid: firebaseUser.uid }, limit: 1 }
+            }
+          });
+          if (mounted && users && users.length > 0) {
+            setUser(users[0] as User);
           }
         }
       } catch (error: any) {
@@ -55,12 +60,12 @@ export default function EntryScreen({ navigation }: Props) {
     if (user) {
       navigation.navigate('Who');
     } else {
-      setShowEmailSignIn(true);
+      setShowPhoneSignIn(true);
     }
   };
 
-  const handleEmailSignInComplete = (authenticatedUser: User) => {
-    setShowEmailSignIn(false);
+  const handlePhoneSignInComplete = (authenticatedUser: User) => {
+    setShowPhoneSignIn(false);
     setUser(authenticatedUser);
     navigation.navigate('Who');
   };
@@ -81,7 +86,10 @@ export default function EntryScreen({ navigation }: Props) {
         <View style={styles.overlay}>
           <View style={styles.buttons}>
             <TouchableOpacity style={[styles.button, styles.primary]} onPress={handleSignedIn}>
-              <Text style={styles.primaryText}>{user ? 'Continue as ' + user.nickname : 'Sign in with Email'}</Text>
+              <Text style={styles.primaryText}>{user ? 'Continue as ' + user.nickname : 'Sign in with Phone'}</Text>
+            </TouchableOpacity>
+            <TouchableOpacity style={[styles.button, styles.secondary]} onPress={() => navigation.navigate('MainTabs')}>
+              <Text style={styles.secondaryText}>Browse as Guest</Text>
             </TouchableOpacity>
             <TouchableOpacity style={[styles.button, styles.secondary]} onPress={handleGuest}>
               <Text style={styles.secondaryText}>Play without signing in</Text>
@@ -89,10 +97,10 @@ export default function EntryScreen({ navigation }: Props) {
           </View>
         </View>
       </ImageBackground>
-      <EmailSignInModal
-        visible={showEmailSignIn}
-        onCancel={() => setShowEmailSignIn(false)}
-        onComplete={handleEmailSignInComplete}
+      <PhoneSignInModal
+        visible={showPhoneSignIn}
+        onCancel={() => setShowPhoneSignIn(false)}
+        onComplete={handlePhoneSignInComplete}
       />
     </SafeAreaView>
   );

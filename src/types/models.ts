@@ -5,6 +5,15 @@ export interface User {
   createdAt: number;
   /** Lowercase mirror used for case-insensitive lookups. */
   nicknameLower?: string;
+  // Firebase auth fields
+  firebaseUid?: string;
+  phone?: string;
+  phoneHash?: string;
+  photoURL?: string;
+  // Stats for leaderboard
+  gamesPlayed?: number;
+  gamesWon?: number;
+  totalPoints?: number;
 }
 
 export interface FriendRequest {
@@ -22,6 +31,9 @@ export interface Room {
   members: string[];
   localPlayers?: { name: string }[];
   createdAt: number;
+  isPublic?: boolean;
+  status?: 'open' | 'in-progress' | 'finished';
+  maxPlayers?: number;
 }
 
 export interface Message {
