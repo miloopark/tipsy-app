@@ -50,6 +50,12 @@
         "projectId": "b38c17e2-12bf-4794-9f1b-f9e781f2059b"
       }
     },
-    "owner": "milopark"
+    "owner": "milopark",
+    "runtimeVersion": {
+      "policy": "appVersion"
+    },
+    "updates": {
+      "url": "https://u.expo.dev/b38c17e2-12bf-4794-9f1b-f9e781f2059b"
+    }
   }
 }
