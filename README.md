@@ -1,6 +1,6 @@
-# Loopy Mobile App
+# Tipsy Mobile App
 
-Loopy is a party game hub designed for fast-paced, ice-breaking fun. The MVP ships with the **Spin** game—an easy, tap-to-spin prompt wheel ideal for gatherings.
+Tipsy is a party game hub designed for fast-paced, ice-breaking fun. The MVP ships with the **Spin** game—an easy, tap-to-spin prompt wheel ideal for gatherings.
 
 ## Features
 - Landing screen with lightweight email sign-in (no backend required yet).
